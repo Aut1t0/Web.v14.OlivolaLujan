@@ -1,0 +1,716 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#14221d">
+  <meta name="description" content="Olivícola Luján — Producción y distribución comercial de aceitunas de mesa desde Maipú, Mendoza, Argentina. Abastecimiento nacional y exportación a Chile, Brasil y mercados internacionales.">
+  <meta name="robots" content="index, follow">
+  <meta name="author" content="Olivícola Luján">
+  <link rel="canonical" href="https://olivicolalujan.github.io/">
+  <title>Olivícola Luján — Aceitunas de Mesa y Distribución Comercial</title>
+  <link rel="icon" type="image/png" href="assets/logo-aventurate.png">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="intro-lock">
+  <!-- Welcome intro / access screen -->
+  <section class="intro-screen" id="introScreen" aria-label="Pantalla de bienvenida" aria-modal="true">
+    <video
+      class="intro-video"
+      id="introVideo"
+      autoplay
+      muted
+      loop
+      playsinline
+      preload="auto"
+      aria-hidden="true"
+    >
+      <source src="assets/Video Project 1.mp4" type="video/mp4">
+      <source src="assets/olive-motion.mp4" type="video/mp4">
+    </video>
+    <div class="intro-overlay" aria-hidden="true"></div>
+
+    <div class="intro-content">
+      <div class="intro-title" aria-hidden="true">OLIVICOLA LUJAN</div>
+      <img
+        class="intro-logo"
+        src="assets/logo-aventurate.png"
+        alt="Olivícola Luján"
+      >
+      <button
+        class="intro-enter"
+        id="introEnter"
+        type="button"
+        aria-label="Aventurate — ingresar al sitio"
+      >AVENTURATE</button>
+    </div>
+  </section>
+
+  <!-- Site loader -->
+  <div class="site-loader" id="siteLoader">
+    <div class="loader-mark">OL</div>
+    <span>Mendoza · Origen · Aceitunas de Mesa</span>
+  </div>
+
+  <!-- Realtime 1:1 olive cursor (no lag) -->
+  <div class="custom-cursor" id="customCursor" aria-hidden="true">
+    <span class="cursor-olive">
+      <svg viewBox="0 0 48 48" width="28" height="28">
+        <ellipse cx="24" cy="26" rx="11" ry="18" transform="rotate(30 24 26)" fill="#6f7e32"/>
+        <path d="M29 9c5-4 10-5 13-3-2 5-5 8-11 9" fill="#aec0a0"/>
+        <path d="M15 36c6-4 13-2 18 1" fill="none" stroke="#465b29" stroke-width="2.5" stroke-linecap="round"/>
+        <circle cx="24" cy="26" r="2" fill="#d6a84f"/>
+      </svg>
+    </span>
+  </div>
+
+  <!-- Utility Bar with Timezone conversion according to visitor country -->
+  <div class="utility-bar">
+    <div class="container utility-inner">
+      <div class="utility-left">
+        <span class="dot-pulse"></span>
+        <span id="utilityHQ">Mendoza, AR (UTC-3): <strong id="mendozaClock">--:--</strong></span>
+        <span class="separator">·</span>
+        <span id="utilityBuyerTime">Hora seleccionada: <strong id="buyerClock">--:--</strong></span>
+        <span class="separator">·</span>
+        <span id="utilitySelectedCountry">País seleccionado: <strong>Argentina</strong></span>
+        <span class="separator">·</span>
+        <span id="utilitySchedule">Atención comercial: 08:00–17:00</span>
+      </div>
+      <div class="utility-right">
+        <button id="openAccountFromTop" class="utility-account">Ingresar cuenta</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Site Header -->
+  <header class="site-header" id="siteHeader">
+    <div class="container nav-wrap">
+      <a class="brand" href="#introScreen" id="brandIntroLink" aria-label="Volver a Aventurate">
+        <span class="brand-mark"><img src="assets/logo-aventurate.png" alt="Olivícola Luján Logo"></span>
+        <span><strong>OLIVÍCOLA</strong><em>LUJÁN</em></span>
+      </a>
+
+      <nav class="desktop-nav">
+        <a href="#about" data-i18n="nav.about">Quiénes somos</a>
+        <a href="#origin" data-i18n="nav.origin">De dónde venís</a>
+        <a href="#products" data-i18n="nav.products">Aceitunas de mesa</a>
+        <a href="#distribution" data-i18n="nav.markets">Mercados</a>
+        <a href="#contact" data-i18n="nav.contact">Contacto</a>
+      </nav>
+
+      <div class="nav-actions">
+        <!-- Quote Cart Button -->
+        <button class="quote-nav-button interactive" id="openQuoteBtn" title="Ver cotización comercial">
+          <span class="quote-label" data-i18n="nav.quote">Cotización</span>
+          <span class="quote-badge" id="quoteBadge">0</span>
+        </button>
+        <!-- Language Switcher -->
+        <a class="lang-switch interactive" id="openLanguage" href="#languageChoice" aria-label="Cambiar idioma">
+          <span id="currentLangCode">ES</span> <span>⌄</span>
+        </a>
+        <!-- Account Button (secondary) -->
+        <button class="account-button interactive" id="openAccount" data-i18n="nav.account">Ingresar cuenta</button>
+        <!-- Mobile Menu Trigger -->
+        <button class="menu-button interactive" id="menuButton" aria-label="Abrir menú">☰</button>
+      </div>
+    </div>
+
+    <!-- Mobile Navigation Menu -->
+    <nav class="mobile-nav" id="mobileNav">
+      <a href="#about" data-i18n="nav.about">Quiénes somos</a>
+      <a href="#origin" data-i18n="nav.origin">De dónde venís</a>
+      <a href="#products" data-i18n="nav.products">Aceitunas de mesa</a>
+      <a href="#distribution" data-i18n="nav.markets">Mercados</a>
+      <a href="#contact" data-i18n="nav.contact">Contacto</a>
+      <button id="mobileQuote" class="mobile-action-btn">Cotización (<span id="mobileQuoteCount">0</span>)</button>
+      <button id="mobileAccount" class="mobile-action-btn" data-i18n="nav.account">Ingresar cuenta</button>
+    </nav>
+  </header>
+
+  <main>
+    <!-- HERO SECTION (House removed from background, atmospheric olive video integrated) -->
+    <section class="hero" id="home">
+      <canvas class="hero-canvas" id="heroCanvas" aria-hidden="true"></canvas>
+      <div class="hero-image" id="heroImage" style="background-image:url('assets/olivara-hero.jpg')"></div>
+      <div class="hero-overlay"></div>
+      
+      <div class="container hero-grid">
+        <div class="hero-copy reveal">
+          <p class="eyebrow hero-eyebrow" data-i18n="hero.eyebrow">Aceitunas de mesa · Distribución comercial</p>
+          <h1 data-i18n="hero.title">Suministro Nacional, listo para el mercado.</h1>
+          <p class="hero-body" data-i18n="hero.body">Una empresa privada mendocina que conecta un abastecimiento confiable de aceitunas de mesa con compradores provinciales, nacionales e internacionales.</p>
+          
+          <div class="hero-actions">
+            <a class="button button-gold interactive" href="#products" data-i18n="hero.primary">Explorar variedades <span>↗</span></a>
+            <a class="button button-outline interactive" href="#distribution" data-i18n="hero.secondary">Ver rutas de mercado <span>↗</span></a>
+            <!-- Deferred commercial sheet: much smaller, aligned at the same line -->
+            <button class="button button-subtle interactive" id="deferredFichaBtn" title="Próximamente disponible">
+              <span data-i18n="hero.ficha">Ficha comercial (Próximamente)</span>
+            </button>
+          </div>
+        </div>
+
+      </div>
+
+      <a class="hero-scroll" href="#about">
+        <span></span>
+        <label data-i18n="hero.scroll">Desplázate para descubrir</label>
+        ↓
+      </a>
+    </section>
+
+  <!-- Language selector: the world map is shown as a lightweight overlay. -->
+  <section class="language-choice-section" id="languageChoice" aria-labelledby="languageChoiceTitle" aria-hidden="true">
+    <button class="language-choice-backdrop" id="languageChoiceBackdrop" type="button" aria-label="Cerrar selector de idioma"></button>
+    <div class="language-choice-dialog" id="languageChoiceDialog" role="dialog" aria-modal="true" aria-labelledby="languageChoiceTitle" tabindex="-1">
+      <div class="language-choice-inner">
+        <div class="language-choice-copy">
+          <p class="eyebrow" id="languageChoiceEyebrow">00 / IDIOMA & ZONA HORARIA</p>
+          <h2 id="languageChoiceTitle">Elegí tu idioma tocando tu país.</h2>
+          <p class="section-body" id="languageChoiceBody">Tocá un país en el mapa. La web detectará el idioma principal de referencia y ajustará automáticamente la hora para mostrarte cuándo podés comunicarte con nuestro equipo.</p>
+          <small class="language-choice-note" id="languageChoiceNote">Español, portugués e inglés se asignan automáticamente. Para cualquier otro idioma, la web usa English como idioma de respaldo.</small>
+        </div>
+
+        <div class="language-map-wrap">
+          <div class="language-map-card card">
+            <div class="language-map-head">
+              <span>EXPLORACIÓN MUNDIAL</span>
+              <strong id="languageMapStatus">TOCÁ UN PAÍS</strong>
+            </div>
+            <div class="language-map-viewport">
+              <iframe
+                id="languageWorldMap"
+                src="assets/mapa_mundial_interactivo.html"
+                title="Mapa mundial interactivo para seleccionar país y zona horaria"
+                loading="eager"
+                referrerpolicy="no-referrer">
+              </iframe>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+    <!-- SECTION 01: ABOUT US -->
+    <section class="section paper" id="about">
+      <div class="container about-grid">
+        <div class="reveal">
+          <p class="eyebrow" data-i18n="about.kicker">01 / Quiénes somos</p>
+          <h2 data-i18n="about.title">Una empresa mendocina con muchas rutas fiables al mercado.</h2>
+          <p class="section-body" data-i18n="about.body">Abastecemos desde San Juan, Mendoza y La Rioja para construir conversaciones claras de suministro provincial, nacional e internacional.</p>
+          <a class="text-link interactive" href="#contact" data-i18n="about.connect">Conectar con el equipo ↗</a>
+        </div>
+
+        <div class="brief-card card interactive tilt reveal">
+          <div class="card-shine"></div>
+          <div class="brief-head">
+            <span data-i18n="about.label">El compromiso comercial</span>
+            <span>✦</span>
+          </div>
+          <div class="brief-lines">
+            <div><b>01</b><p data-i18n="about.item1">Abastecimiento desde San Juan, Mendoza y La Rioja</p><i>↗</i></div>
+            <div><b>02</b><p data-i18n="about.item2">Alcance provincial, nacional e internacional</p><i>↗</i></div>
+            <div><b>03</b><p data-i18n="about.item3">Documentación preparada para exportación</p><i>↗</i></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="container metrics-rail">
+        <div><strong>03</strong><span data-i18n="about.metric1">Provincias de origen</span></div>
+        <div><strong>24</strong><span data-i18n="about.metric2">Puntos de mercado nacional</span></div>
+        <div><strong>08</strong><span data-i18n="about.metric3">Variedades de aceituna</span></div>
+        <div><strong>01</strong><span data-i18n="about.metric4">Base comercial Maipú</span></div>
+      </div>
+    </section>
+
+    <!-- SECTION 02: ORIGIN & NOSTALGIA: ¿DE DÓNDE SOS? VENÍS A PROBAR -->
+    <section class="section origin-story" id="origin">
+      <div class="container origin-grid">
+        <div class="origin-copy reveal">
+          <p class="eyebrow gold" data-i18n="origin.eyebrow">02 Tradición y Memoria Rural</p>
+          <h2 data-i18n="origin.title">¿De dónde sos? Venís, probás y entendés el origen.</h2>
+          <p class="section-body light-body" data-i18n="origin.body">
+            En Mendoza la aceituna no es solo un producto de despacho: es la mesa del domingo, el trabajo bajo el sol de Cuyo, las manos que cosechan y la memoria compartida de generaciones. 
+            Te invitamos a conectar con un sabor honesto que nace entre hileras de olivos regados por agua de cordillera.
+          </p>
+          <div class="origin-highlights">
+            <div class="origin-item">
+              <strong>Mendoza pura</strong>
+              <span>Tierra seca, sol generoso y agua pura de deshielo andino.</span>
+            </div>
+            <div class="origin-item">
+              <strong>Manos reales</strong>
+              <span>Gente de nuestra provincia cuidando la textura de cada tambor.</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="origin-media card reveal origin-video-media">
+          <video class="origin-video" id="originAmbientVideo" autoplay muted loop playsinline preload="auto" poster="assets/olive-motion-poster.webp">
+            <source src="assets/olive-motion.mp4" type="video/mp4">
+            Tu navegador no soporta la reproducción de video.
+          </video>
+          <div class="origin-caption">
+            <span>ORIGEN / MAIPÚ, MENDOZA</span>
+            <small>Cosecha y embalaje en vivo · Tradición y memoria rural.</small>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 03: LOCAL TEAM & WORKERS VIDEO CAROUSEL -->
+    <section class="section impact paper">
+      <div class="container impact-grid">
+        <div class="reveal">
+          <p class="eyebrow" data-i18n="impact.kicker">03 / Aporte local</p>
+          <h2 data-i18n="impact.title">Un equipo que mantiene el valor cerca de casa.</h2>
+          <p class="section-body" data-i18n="impact.body">Detrás de cada despacho hay un equipo local de aproximadamente 25 personas que trabaja en preparación, coordinación, calidad y atención comercial.</p>
+          
+          <div class="impact-items">
+            <div><b>01</b><strong data-i18n="impact.item1">Empleo local estable en Maipú</strong><span>↗</span></div>
+            <div><b>02</b><strong data-i18n="impact.item2">Conocimiento práctico compartido cada día</strong><span>↗</span></div>
+            <div><b>03</b><strong data-i18n="impact.item3">Un vínculo directo entre origen y mercado</strong><span>↗</span></div>
+          </div>
+        </div>
+
+        <div class="workers-photo-card card reveal">
+          <img class="workers-photo" src="assets/grupo-gente-mirando-atras.webp" alt="Grupo de personas mirando hacia atrás entre olivares" loading="lazy">
+          <div class="workers-video-overlay">
+            <strong>25</strong>
+            <span data-i18n="impact.statLabel">Personas que sostienen la operación</span>
+            <small>TRABAJO LOCAL · MENDOZA</small>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 04: MAIN CATALOG -->
+    <section class="section olive" id="products">
+      <div class="container section-intro products-intro reveal">
+        <div>
+          <p class="eyebrow gold" data-i18n="products.eyebrow">04 / Catálogo Principal</p>
+          <h2 data-i18n="products.title">Aceitunas de Mesa: El formato adecuado para cada conversación comercial.</h2>
+        </div>
+      </div>
+
+      <!-- OLIVE VARIETIES HORIZONTAL GALLERY -->
+      <div class="container olive-catalog-grid" id="oliveCatalogGrid">
+        <!-- Rendered via JavaScript -->
+      </div>
+      <div class="container product-detail-inline" id="productDetailInline" aria-live="polite">
+        <div class="product-detail-empty">Selecciona una variedad para consultar su detalle y preparar una cotización.</div>
+      </div>
+    </section>
+
+    <!-- SECTION 05: MARKET PRESENCE / NATIONAL + INTERNATIONAL -->
+    <section class="section market-detail-section paper" id="distribution">
+      <div class="container market-presence-intro">
+        <div>
+          <p class="eyebrow" data-i18n="markets.eyebrow">05 / Presencia en el Mercado</p>
+          <h2 data-i18n="markets.title">Presencia en el Mercado</h2>
+        </div>
+        <div class="market-presence-copy">
+          <p class="section-body" data-i18n="markets.body">Cobertura comercial nacional y rutas de comercio exterior organizadas por territorio.</p>
+          <div class="presence-legend" aria-label="Leyenda de cobertura">
+            <span><i class="presence-dot presence-dot-active"></i><span data-i18n="markets.activeLegend">Activo</span></span>
+            <span><i class="presence-dot presence-dot-neutral"></i><span data-i18n="markets.neutralLegend">Sin cobertura</span></span>
+          </div>
+        </div>
+      </div>
+
+      <div class="container market-sub-block">
+        <div class="market-header reveal">
+          <div>
+            <p class="eyebrow" data-i18n="markets.argEyebrow">Distribución Nacional</p>
+            <h2 data-i18n="markets.argTitle">Presencia en el Mercado Argentino</h2>
+          </div>
+        </div>
+
+        <div class="market-map-layout">
+          <div class="market-svg-container card reveal" id="argentinaMapBox">
+            <div class="market-map-canvas argentina-map-canvas">
+              <img class="market-map-base argentina-base" src="assets/proyeccion-argentina.webp" alt="Mapa Nacional de Argentina" width="1168" height="1347" loading="lazy" decoding="async">
+            </div>
+          </div>
+
+          <div class="market-side-column">
+            <div class="market-meta-panel card reveal">
+              <div class="meta-panel-head">
+                <strong data-i18n="markets.provincesStatus">Provincias de la red</strong>
+                <span class="legend-indicator">
+                  <i class="dot-active"></i><span data-i18n="markets.activeLegend">Activo</span>
+                  <i class="dot-neutral"></i><span data-i18n="markets.neutralLegend">Sin cobertura</span>
+                </span>
+              </div>
+              <div class="provinces-scroll-list" id="provincesList"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="container market-sub-block market-sub-block-secondary" id="export">
+        <div class="market-header reveal">
+          <div>
+            <p class="eyebrow gold" data-i18n="markets.intlEyebrow">Mercado Exterior</p>
+            <h2 data-i18n="markets.intlTitle">Presencia en el Mercado Internacional</h2>
+          </div>
+        </div>
+
+        <div class="market-map-layout">
+          <div class="market-svg-container card reveal" id="intlMapBox">
+            <div class="market-map-canvas world-map-canvas">
+              <img class="market-map-base world-market-base" src="assets/mapa-idiomas.webp" alt="Mapa Mundi de presencia internacional" width="1671" height="941" loading="lazy" decoding="async">
+            </div>
+          </div>
+
+          <div class="market-side-column">
+            <div class="market-meta-panel card reveal">
+              <div class="meta-panel-head">
+                <strong data-i18n="markets.intlStatus">Destinos de exportación</strong>
+                <span class="legend-indicator">
+                  <i class="dot-active"></i><span data-i18n="markets.activeLegend">Activo</span>
+                  <i class="dot-neutral"></i><span data-i18n="markets.neutralLegend">Sin cobertura</span>
+                </span>
+              </div>
+              <div class="countries-scroll-list" id="countriesList"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 06: LOCATION & CONTACT (UPDATED ADDRESS: TROPERO SOSA 933) -->
+    <section class="section contact" id="contact">
+      <div class="container contact-grid">
+        <div class="reveal">
+          <p class="eyebrow gold" data-i18n="contact.eyebrow">06 / Contacto & Sede</p>
+          <h2 data-i18n="contact.title">Hagamos que el próximo envío tenga sentido.</h2>
+          <p class="section-body" data-i18n="contact.body">
+            Comunícate con nuestro equipo comercial para solicitar información, planificar despachos o coordinar visitas comerciales a nuestra planta en Mendoza.
+          </p>
+          <div class="contact-actions">
+            <a class="button button-gold interactive" href="mailto:emercado@olivicola.com" data-i18n="contact.btnEmail">Enviar correo comercial ↗</a>
+            <a class="button button-outline interactive" href="https://wa.me/542615503895?text=Hola%2C%20quiero%20hacer%20una%20consulta%20comercial%20a%20Oliv%C3%ADcola%20Luj%C3%A1n" target="_blank" rel="noopener">WhatsApp directo ↗</a>
+          </div>
+        </div>
+
+        <div class="contact-details reveal">
+          <a href="https://www.google.com/maps/search/?api=1&query=Tropero%20Sosa%20933%2C%20Maipu%2C%20Mendoza%2C%20Argentina" target="_blank" rel="noopener">
+            <span>Dirección comercial</span>
+            <strong>Tropero Sosa 933</strong>
+          </a>
+          <a href="mailto:emercado@olivicola.com">
+            <span>Email</span>
+            <strong>emercado@olivicola.com</strong>
+          </a>
+          <a href="tel:+542615503895">
+            <span>Teléfono comercial</span>
+            <strong>+54 261-550-3895</strong>
+          </a>
+          <div class="hours-block">
+            <span id="contactHoursLabelTitle">Horario laboral (Mendoza UTC-3)</span>
+            <strong id="contactHoursLabel">Lunes–viernes · 08:00–17:00</strong>
+            <small id="contactHoursConverted" class="hours-converted">Elegí un país en el mapa para ver tu horario equivalente.</small>
+          </div>
+        </div>
+      </div>
+
+      <!-- Accurate Google Maps Embed with Tropero Sosa 933 -->
+      <div class="container contact-map-wrap reveal">
+        <div class="map-embed-container card">
+          <iframe
+            src="https://www.google.com/maps?q=Tropero+Sosa+933,+Maip%C3%BA,+Mendoza,+Argentina&output=embed"
+            title="Olivícola Luján · Tropero Sosa 933, Maipú, Mendoza"
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            allowfullscreen>
+          </iframe>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 07: RATING & FEEDBACK WITH TEXT COMMENT PERSISTENCE -->
+    <section class="section feedback paper" id="feedback">
+      <div class="container feedback-grid">
+        <div class="reveal">
+          <p class="eyebrow" data-i18n="rating.kicker">07 / Tu opinión</p>
+          <h2 id="ratingTitle" data-i18n="rating.title">¿Qué te parece nuestra empresa?</h2>
+          <p class="section-body" data-i18n="rating.body">
+            Tu valoración y tus comentarios nos ayudan a seguir perfeccionando nuestro servicio de atención y la calidad de cada lote.
+          </p>
+        </div>
+
+        <div class="rating-card card interactive tilt reveal">
+          <div class="stars" id="stars" role="radiogroup" aria-label="Valorar la empresa">
+            <button data-rating="1" aria-label="1 estrella">★</button>
+            <button data-rating="2" aria-label="2 estrellas">★</button>
+            <button data-rating="3" aria-label="3 estrellas">★</button>
+            <button data-rating="4" aria-label="4 estrellas">★</button>
+            <button data-rating="5" aria-label="5 estrellas">★</button>
+          </div>
+          <p id="ratingMessage">Selecciona una puntuación</p>
+
+          <div class="rating-comment-wrap">
+            <textarea id="ratingComment" rows="3" placeholder="Escribe un breve comentario sobre tu experiencia o interés comercial..." maxlength="300"></textarea>
+          </div>
+
+          <button class="button button-dark" id="saveRating" data-i18n="rating.save">Guardar valoración</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Site Footer -->
+  <footer class="site-footer">
+    <div class="container footer-main">
+      <div class="footer-brand">
+        <span class="brand-mark"><img src="assets/logo-aventurate.png" alt=""></span>
+        <div>
+          <strong>OLIVÍCOLA LUJÁN</strong>
+          <p>Producción y distribución comercial de aceitunas de mesa desde Maipú, Mendoza, Argentina.</p>
+          <small class="address-footer">Tropero Sosa 933 · Maipú · Mendoza</small>
+        </div>
+      </div>
+
+      <div>
+        <p class="eyebrow gold">Garantía Comercial</p>
+        <div class="badges">
+          <span>✓ Trazabilidad en origen</span>
+          <span>✓ Salmuera controlada</span>
+          <span>✓ Despacho en tambores</span>
+          <span>✓ Habilitación exportación</span>
+        </div>
+      </div>
+
+      <div>
+        <p class="eyebrow gold">Rutas Directas</p>
+        <div class="footer-links">
+          <a href="#products">Catálogo de aceitunas</a>
+          <a href="#distribution">Mapa de distribución</a>
+          <a href="#contact">Sede en Mendoza</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="container footer-bottom">
+      <span>© 2026 OLIVÍCOLA LUJÁN · MENDOZA, ARGENTINA</span>
+      <span id="footerVisitors">Visitas en este dispositivo: 0</span>
+      <button id="openAccountFooter">Ingresar cuenta</button>
+    </div>
+  </footer>
+
+  <!-- DEDICATED PRODUCT DETAIL MODAL -->
+  <div class="product-modal" id="productModal" aria-hidden="true" role="dialog">
+    <div class="modal-backdrop" data-close-product></div>
+    <div class="product-modal-box">
+      <button class="close-modal" data-close-product aria-label="Cerrar modal">×</button>
+      <div class="product-modal-grid">
+        <div class="product-modal-img-wrap">
+          <img id="modalProductImg" src="" alt="">
+          <span class="product-modal-tag" id="modalProductFormat">TAMBOR INDUSTRIAL</span>
+        </div>
+        <div class="product-modal-info">
+          <p class="eyebrow gold">ACEITUNA DE MESA</p>
+          <h2 id="modalProductTitle">Variedad</h2>
+          <p id="modalProductDesc" class="modal-desc"></p>
+          
+          <div class="quote-builder-row">
+            <label for="modalProductQty">Cantidad de tambores:</label>
+            <div class="qty-stepper">
+              <button id="qtyMinus" type="button">-</button>
+              <input type="number" id="modalProductQty" value="0" min="0" max="1000">
+              <button id="qtyPlus" type="button">+</button>
+            </div>
+          </div>
+
+          <div class="product-modal-actions">
+            <button class="button button-gold" id="addToQuoteBtn">
+              <span>Añadir a cotización</span>
+              <span>↗</span>
+            </button>
+            <button class="button button-outline" id="instantWhatsappBtn">
+              <span>Cotizar directo en WhatsApp</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- QUOTE INTENT DRAWER (Cart named "Cotización") -->
+  <div class="quote-drawer" id="quoteDrawer" aria-hidden="true">
+    <div class="drawer-backdrop" data-close-quote></div>
+    <div class="quote-drawer-panel">
+      <div class="drawer-header">
+        <div>
+          <p class="eyebrow gold">COTIZACIÓN COMERCIAL</p>
+          <h2>Tu Solicitud</h2>
+        </div>
+        <button class="close-modal" data-close-quote aria-label="Cerrar cotizador">×</button>
+      </div>
+
+      <div class="quote-items-list" id="quoteItemsList">
+        <!-- Rendered by JS -->
+      </div>
+
+      <div class="drawer-footer">
+        <div class="quote-summary">
+          <span>Total tambores solicitados:</span>
+          <strong id="quoteTotalDrums">0</strong>
+        </div>
+        <p class="quote-notice">
+          Sin pagos en línea. Al confirmar, se abrirá WhatsApp con el mensaje exacto para contactar a nuestro responsable comercial.
+        </p>
+        <button class="button button-gold btn-full" id="sendQuoteWhatsappBtn">
+          <span>Enviar cotización a WhatsApp</span>
+          <span>↗</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- DETERMINISTIC FAQ CHATBOT WIDGET -->
+  <div class="faq-widget" id="faqWidget">
+    <!-- Collapsed button -->
+    <button class="faq-toggle-btn interactive" id="faqToggleBtn" aria-label="Abrir preguntas frecuentes">
+      <span class="faq-icon">?</span>
+      <span class="faq-text" data-i18n="faq.button">Preguntas Frecuentes</span>
+    </button>
+
+    <!-- Expanded FAQ Card -->
+    <div class="faq-card card" id="faqCard" aria-hidden="true">
+      <div class="faq-card-header">
+        <div>
+          <strong data-i18n="faq.title">Asistente de Preguntas Frecuentes</strong>
+          <small data-i18n="faq.subtitle">Respuestas rápidas sobre cotización, aceitunas y envíos</small>
+        </div>
+        <button class="close-faq-btn" id="closeFaqBtn" aria-label="Cerrar FAQ">×</button>
+      </div>
+
+      <div class="faq-content">
+        <p class="faq-prompt-text" data-i18n="faq.prompt">¿Qué te gustaría consultar?</p>
+        <div class="faq-questions-list" id="faqQuestionsList">
+          <!-- Populated by JS -->
+        </div>
+
+        <div class="faq-answer-box" id="faqAnswerBox" style="display:none;">
+          <h4 id="faqAnswerQuestion"></h4>
+          <p id="faqAnswerText"></p>
+          <button class="text-link" id="faqBackBtn">← Volver a preguntas</button>
+        </div>
+      </div>
+
+      <div class="faq-card-footer">
+        <span>¿Dudas comerciales específicas?</span>
+        <a href="https://wa.me/542615503895" target="_blank" rel="noopener">Hablar por WhatsApp ↗</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ACCOUNT MODAL (Customer vs Owner/Internal Team with Roles: Manager, Admin, Head, Developer) -->
+  <div class="account-modal" id="accountModal" aria-hidden="true">
+    <div class="modal-backdrop" data-close-account></div>
+    <div class="account-box">
+      <button class="close-modal" data-close-account aria-label="Cerrar">×</button>
+      <p class="eyebrow gold">ACCESO DE USUARIO</p>
+      <h2>Ingresar cuenta</h2>
+      <p class="account-intro">Accede como cliente comercial para guardar tus cotizaciones o como equipo interno para ver estadísticas.</p>
+
+      <!-- Account Role Tabs: Cliente vs Dueño/Interno -->
+      <div class="account-tabs">
+        <button class="account-tab-btn active" id="tabCustomer">Cliente Comercial</button>
+        <button class="account-tab-btn" id="tabInternal">Dueño / Equipo Interno</button>
+      </div>
+
+      <!-- Customer Form -->
+      <form id="accountFormCustomer" class="account-form-panel">
+        <!-- Google OAuth Integration Button -->
+        <button type="button" class="google-auth-btn" id="googleSignInCustomer">
+          <svg viewBox="0 0 24 24" width="18" height="18">
+            <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+            <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+            <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"/>
+            <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/>
+          </svg>
+          <span>Continuar con Google</span>
+        </button>
+        <div class="form-divider"><span>o completar datos</span></div>
+        <label>Nombre y Apellido
+          <input id="customerName" required maxlength="60" autocomplete="name" placeholder="Ej: Marcelo Silva">
+        </label>
+        <label>Empresa / Distribuidora
+          <input id="customerCompany" maxlength="80" autocomplete="organization" placeholder="Ej: Alimentos del Sur S.A.">
+        </label>
+        <label>País de origen
+          <select id="customerCountry">
+            <option value="Argentina">Argentina</option>
+            <option value="Brasil">Brasil</option>
+            <option value="Chile">Chile</option>
+            <option value="Uruguay">Uruguay</option>
+            <option value="Estados Unidos">Estados Unidos</option>
+            <option value="España">España</option>
+            <option value="Otro">Otro destino</option>
+          </select>
+        </label>
+        <button class="button button-gold" type="submit">Guardar perfil de cliente ↗</button>
+      </form>
+
+      <!-- Owner / Internal Team Form with explicit roles -->
+      <form id="accountFormInternal" class="account-form-panel" style="display:none;">
+        <p class="role-desc">Acceso exclusivo para Gerente, Administrador, Jefe y Programador para consultar estadísticas de navegación.</p>
+        <label>Perfil Interno
+          <select id="internalRole">
+            <option value="gerente">Gerente (Gestión comercial & cotizaciones)</option>
+            <option value="administrador">Administrador (Métricas & mercados)</option>
+            <option value="jefe">Jefe (Operaciones de planta & logística)</option>
+            <option value="programador">Programador (Arquitectura & rendimiento)</option>
+          </select>
+        </label>
+        <label>Clave o token de acceso
+          <input id="internalToken" type="password" required placeholder="Ingresar credencial interna">
+        </label>
+        <button class="button button-dark" type="submit">Acceder al panel interno ↗</button>
+      </form>
+
+      <!-- Internal Analytics Dashboard (Shown only when authenticated with internal role) -->
+      <div id="internalDashboard" class="internal-dashboard" style="display:none;">
+        <h3>Métricas de la Plataforma</h3>
+        <p class="dashboard-badge" id="activeRoleBadge">Rol: Gerente</p>
+        <div class="metrics-grid">
+          <div class="metric-box">
+            <small>Visitas registradas</small>
+            <strong id="statVisits">0</strong>
+          </div>
+          <div class="metric-box">
+            <small>Cotizaciones iniciadas</small>
+            <strong id="statQuotes">0</strong>
+          </div>
+          <div class="metric-box">
+            <small>Valoraciones locales</small>
+            <strong id="statRatings">0</strong>
+          </div>
+          <div class="metric-box">
+            <small>Consultas FAQ</small>
+            <strong id="statFaq">0</strong>
+          </div>
+        </div>
+        <button class="text-link" id="logoutInternalBtn">Cerrar sesión interna</button>
+      </div>
+
+      <div class="account-status" id="accountStatus"></div>
+    </div>
+  </div>
+
+  <!-- LIGHTBOX & TOAST -->
+  <div class="lightbox" id="lightbox" aria-hidden="true">
+    <button id="closeLightbox" aria-label="Cerrar imagen">×</button>
+    <img id="lightboxImage" alt="">
+  </div>
+  <div class="toast" id="toast"></div>
+
+  <!-- SCRIPTS -->
+  <script src="script.js"></script>
+</body>
+</html>
